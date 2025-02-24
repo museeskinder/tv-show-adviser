@@ -11,7 +11,9 @@ export function App() {
         if(populars.length > 0) 
             setCurrentTvShow(populars[1]);
     };
- 
+    
+    //since we dont want the to fetch the api several times upon props update
+    //api fetch one time upone page load
     useEffect(() => {
         fetchPopulars();
     }, []);
