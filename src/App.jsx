@@ -9,9 +9,16 @@ import LogoImg from "./assets/images/logo.png";
 
 export function App() {
   const [currentTvShow, setCurrentTvShow] = useState();
+  const [recommendationList, setRecommendationList] = useState([]);
+
   const fetchPopulars = async () => {
     const populars = await TvShowAPI.fetchPopulars();
     if (populars.length > 0) setCurrentTvShow(populars[1]);
+  };
+
+  const fetchRecommendation = async (tvShowId) => {
+    const recommendations = await TvShowAPI.fetchRecommendation(tvShowId);
+    if (recommendations.length > 0) setRecommendationList(recommendations.slice(0, 10));
   };
 
   //since we dont want the to fetch the api several times upon props update
@@ -20,7 +27,11 @@ export function App() {
     fetchPopulars();
   }, []);
 
-  console.log(currentTvShow);
+  useEffect(() => {
+    if(currentTvShow) fetchRecommendation(currentTvShow.id);
+  }, [currentTvShow]);
+
+  console.log(recommendationList);
 
   return (
     <div
@@ -53,7 +64,25 @@ export function App() {
           <TVShowListItem
             tvShow={currentTvShow}
             onClick={(tvShow) => {
-              console.log("I have been clicked " , tvShow);
+              console.log("I have been clicked ", tvShow);
+            }}
+          />
+        )}
+
+        {currentTvShow && (
+          <TVShowListItem
+            tvShow={currentTvShow}
+            onClick={(tvShow) => {
+              console.log("I have been clicked ", tvShow);
+            }}
+          />
+        )}
+
+        {currentTvShow && (
+          <TVShowListItem
+            tvShow={currentTvShow}
+            onClick={(tvShow) => {
+              console.log("I have been clicked ", tvShow);
             }}
           />
         )}
