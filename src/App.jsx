@@ -3,6 +3,8 @@ import { TvShowAPI } from "./api/tv-show";
 import { TVShowDetail } from "./components/TVShowDetail/TVShowDetail";
 import s from "./style.module.css";
 import { useEffect, useState } from "react";
+import { Logo } from "./components/Logo/Logo";
+import LogoImg from "./assets/images/logo.png";
 
 export function App() {
     const [currentTvShow, setCurrentTvShow] = useState();
@@ -29,8 +31,7 @@ export function App() {
             <div className={s.header}>
                 <div className="row">
                     <div className="col-4">
-                        <div>LOGO</div>
-                        <div>Subtitle</div>
+                        <Logo img={LogoImg} title="Wattowatch" subtitle="Find a show you may Like"/>
                     </div>
                     <div className="col-md-12 col-lg-4">
                         <input style={{width: '100%'}} type="search" />
