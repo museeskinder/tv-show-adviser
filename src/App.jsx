@@ -21,6 +21,10 @@ export function App() {
     if (recommendations.length > 0) setRecommendationList(recommendations.slice(0, 10));
   };
 
+  const updateCurrentTVShow = (tvShow) => {
+    setCurrentTvShow(tvShow);
+  }
+
   //since we dont want the to fetch the api several times upon props update
   //api fetch one time upone page load
   useEffect(() => {
@@ -60,7 +64,7 @@ export function App() {
         {currentTvShow && <TVShowDetail tvShow={currentTvShow} />}
       </div>
       <div className={s.recommended_tv_shows}>
-        {recommendationList && <TVShowList tvShowList={recommendationList}/>}
+        {recommendationList && <TVShowList tvShowList={recommendationList} onItemClick={updateCurrentTVShow} />}
       </div>
     </div>
   );

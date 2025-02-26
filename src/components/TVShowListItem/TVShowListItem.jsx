@@ -2,7 +2,7 @@ import s from "./style.module.css";
 import { SMALL_IMAGE_COVER_BASE_URL } from "../../api/config";
 const MAX_TITLE_LENGTH = 20;
 
-export const TVShowListItem = ({ tvShow, onClick }) => {
+export const TVShowListItem = ({ tvShow, onClick}) => {
   return (
     <div className={s.container} onClick={() => onClick(tvShow)}>
       <img
