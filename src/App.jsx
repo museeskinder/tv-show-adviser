@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Logo } from "./components/Logo/Logo";
 import LogoImg from "./assets/images/logo.png";
 import { TVShowList } from './components/TVShowList/TVShowList';
+import { Search } from './components/Search/Search';
 
 export function App() {
   const [currentTvShow, setCurrentTvShow] = useState();
@@ -21,6 +22,11 @@ export function App() {
     if (recommendations.length > 0) setRecommendationList(recommendations.slice(0, 10));
   };
 
+  const fetchSearch = async (title) => {
+    const searchResult = await TvShowAPI.fetchSearch(title);
+    if (searchResult.length > 0) setCurrentTvShow(searchResult[0]);
+  };
+
   const updateCurrentTVShow = (tvShow) => {
     setCurrentTvShow(tvShow);
   }
@@ -34,8 +40,6 @@ export function App() {
   useEffect(() => {
     if(currentTvShow) fetchRecommendation(currentTvShow.id);
   }, [currentTvShow]);
-
-  console.log(recommendationList);
 
   return (
     <div
@@ -56,7 +60,7 @@ export function App() {
             />
           </div>
           <div className="col-md-12 col-lg-4">
-            <input style={{ width: "100%" }} type="search" />
+            <Search onSubmit={fetchSearch}/>
           </div>
         </div>
       </div>
