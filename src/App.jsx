@@ -1,11 +1,11 @@
 import { BACKDROP_BASE_URL } from "./api/config";
 import { TvShowAPI } from "./api/tv-show";
 import { TVShowDetail } from "./components/TVShowDetail/TVShowDetail";
-import { TVShowListItem } from "./components/TVShowListItem/TVShowListItem";
 import s from "./style.module.css";
 import { useEffect, useState } from "react";
 import { Logo } from "./components/Logo/Logo";
 import LogoImg from "./assets/images/logo.png";
+import { TVShowList } from './components/TVShowList/TVShowList';
 
 export function App() {
   const [currentTvShow, setCurrentTvShow] = useState();
@@ -13,7 +13,7 @@ export function App() {
 
   const fetchPopulars = async () => {
     const populars = await TvShowAPI.fetchPopulars();
-    if (populars.length > 0) setCurrentTvShow(populars[1]);
+    if (populars.length > 0) setCurrentTvShow(populars[2]);
   };
 
   const fetchRecommendation = async (tvShowId) => {
@@ -60,32 +60,7 @@ export function App() {
         {currentTvShow && <TVShowDetail tvShow={currentTvShow} />}
       </div>
       <div className={s.recommended_tv_shows}>
-        {currentTvShow && (
-          <TVShowListItem
-            tvShow={currentTvShow}
-            onClick={(tvShow) => {
-              console.log("I have been clicked ", tvShow);
-            }}
-          />
-        )}
-
-        {currentTvShow && (
-          <TVShowListItem
-            tvShow={currentTvShow}
-            onClick={(tvShow) => {
-              console.log("I have been clicked ", tvShow);
-            }}
-          />
-        )}
-
-        {currentTvShow && (
-          <TVShowListItem
-            tvShow={currentTvShow}
-            onClick={(tvShow) => {
-              console.log("I have been clicked ", tvShow);
-            }}
-          />
-        )}
+        {recommendationList && <TVShowList tvShowList={recommendationList}/>}
       </div>
     </div>
   );
